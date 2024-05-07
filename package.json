@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/JadirMiramontes/proyectoSockets/issues"
   },
-  "homepage": "https://github.com/JadirMiramontes/proyectoSockets#readme"
+  "homepage": "https://github.com/JadirMiramontes/proyectoSockets#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
 }
