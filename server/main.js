@@ -1,16 +1,16 @@
 var express = require('express');
 var app = express();
-
-/* Como trabajaremos con socket, es recomendable usar el modulo HTTP para pasarle la app a express y manejar bien HTTP*/
 var server = require('http').Server(app);
-
-/* *Aqui estará toda la funcionalidad de los sockets
-   *Se requiere la libreria socket.io
-   *Se pasa la variable Server que tiene la app express y HTTP */
 var io = require('socket.io')(server);
+
+app.use(express.static('public'));
 
 app.get('/',function(req,res){
     res.status(200).send("Hola Mundo");
+});
+
+io.on('connection', function(socket){
+    console.log('Alguien se ha conectado con socket')
 });
 
 server.listen(3010, function(){
