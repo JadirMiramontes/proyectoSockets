@@ -11,6 +11,12 @@ app.get('/',function(req,res){
 
 io.on('connection', function(socket){
     console.log('Alguien se ha conectado con socket')
+    /*Aqui controlamos los eventos del cliente mediante sockets */
+    socket.emit('messages', {
+        id:1,
+        texto: "Hola mundo, como estan, yo muy bien",
+        autor: "Jadir Omar Miramontes Armendariz"
+    });
 });
 
 server.listen(3010, function(){

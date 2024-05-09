@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device.width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi aplicacion con socket</title>
     <!--Mandamos llamar la libreria para que el fronend use sokcet.io-->
     <!--Es una libreria que se utiliza tanto en el server como en el cliente-->
@@ -11,5 +11,16 @@
 </head>
 <body>
     <h1>Mi aplicacion</h1>
+    <!--Queremos que estos mensajes se vean en nuestra pagina como un chat-->
+    <div id="messages"></div>
+    <br>
+    <!--Creamos un formulario para mandar mensajes-->
+    <!--No pondremos una accion para que nos recarge la pagina y todo sea realtime-->
+    <!--Por lo tanto utilizaremos onsubmit que hara la conexion con el servidor-->
+    <form onsubmit="return addMessage(this)">
+        <input type="text" id="username" placeholder="Tu nombre">
+        <input type="text" id="texto" placeholder="Cuentanos algo">
+        <input type="submit" value="Enviar">
+    </form>
 </body>
 </html>
