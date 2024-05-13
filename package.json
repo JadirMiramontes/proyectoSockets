@@ -1,6 +1,6 @@
 {
   "name": "proyecto_sockets",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Proyecto usando sockets",
   "main": "index.js",
   "scripts": {
