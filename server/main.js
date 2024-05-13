@@ -2,6 +2,12 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+//array que guarda los mensajes
+var messages = [{
+    id:1,
+    texto: "Hola mundo, como estan, yo muy bien",
+    autor: "Jadir Omar Miramontes Armendariz"
+}];
 
 app.use(express.static('public'));
 
@@ -11,11 +17,11 @@ app.get('/',function(req,res){
 
 io.on('connection', function(socket){
     console.log('Alguien se ha conectado con socket')
-    /*Aqui controlamos los eventos del cliente mediante sockets */
-    socket.emit('messages', {
-        id:1,
-        texto: "Hola mundo, como estan, yo muy bien",
-        autor: "Jadir Omar Miramontes Armendariz"
+    socket.emit('messages',messages);
+    //Ahora queremos escuchar los mensajes mandados por el cliente
+    socket.on('new-message', function(data){
+        //queremos que todos los mensajes se manden a todos los clientes
+        io.sockets.emit('messages',messages);
     });
 });
 
