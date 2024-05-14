@@ -20,6 +20,7 @@ io.on('connection', function(socket){
     socket.emit('messages',messages);
     //Ahora queremos escuchar los mensajes mandados por el cliente
     socket.on('new-message', function(data){
+        messages.push(data);
         //queremos que todos los mensajes se manden a todos los clientes
         io.sockets.emit('messages',messages);
     });

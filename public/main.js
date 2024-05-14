@@ -19,8 +19,8 @@ function render(data){
 //el cliente emite un nuevo mensaje y manda el payload
 function addMessage(e){
     var payload = {
-        autor: document.getElementById(username).value,
-        texto: document.getElementById(texto).value
+        autor: document.getElementById('username').value,
+        texto: document.getElementById('texto').value
     };
     socket.emit('new-message', payload);
     return false;
