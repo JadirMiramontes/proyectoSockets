@@ -2,6 +2,16 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+const cors = require('cors');
+const routes = require('../routes/routes');
+const bodyParser = require('body-parser');
+
+//Usar Node.js body parsing middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true,
+}));
+
 //array que guarda los mensajes
 var messages = [{
     id:1,
@@ -10,6 +20,8 @@ var messages = [{
 }];
 
 app.use(express.static('public'));
+app.use(cors());
+routes(app);
 
 app.get('/',function(req,res){
     res.status(200).send("Hola Mundo");
