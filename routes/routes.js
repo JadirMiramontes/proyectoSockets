@@ -58,6 +58,40 @@ const router = app => {
             response.send('User deleted.');
         });
     });
+
+//********************************************************************************* */
+app.post('/register', async (req, res) => {
+    const { username, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    pool.query('INSERT INTO users SET ?', { username, password: hashedPassword }, (error, result) => {
+        if (error) return res.status(500).send({ message: 'Ocurrio un error al crear al usuario' });
+        res.status(201).send({ message: 'User created' });
+    });
+});
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    pool.query('SELECT * FROM users WHERE username = ?', username, async (error, results) => {
+        if (error) return res.status(500).send({ message: 'Error logging in' });
+
+        if (results.length === 0) {
+            return res.status(401).send({ message: 'Contraseña o usuario incorrectos' });
+        }
+
+        const user = results[0];
+        const match = await bcrypt.compare(password, user.password);
+
+        if (!match) {
+            return res.status(401).send({ message: 'Contraseña o usuario incorrectos' });
+        }
+
+        res.status(200).send({ message: 'Ingresando' });
+    });
+});
+//********************************************************************************** */
+
 };
 
 // Exportar el router
